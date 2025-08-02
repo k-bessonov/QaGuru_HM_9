@@ -43,7 +43,6 @@ public class JsonParsingTest {
             Assertions.assertEquals(LocalDate.parse("2023-06-01"), book.getBorrowHistory().get(0).getReturnDate());
             Assertions.assertEquals(4, book.getRatings().size());
             Assertions.assertEquals(5.0, book.getRatings().get(1));
-
         }
     }
 }
