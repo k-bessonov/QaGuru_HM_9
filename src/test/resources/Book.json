@@ -1,0 +1,26 @@
+{
+  "book": {
+    "title": "Гарри Поттер и философский камень",
+    "author": "Джоан Роулинг",
+    "publishedYear": 1997,
+    "isbn": "978-5-389-07435-4",
+    "genres": ["Фэнтези", "Приключения", "Детская литература"],
+    "pageCount": 432,
+    "publisher": "Махаон",
+    "language": "Русский",
+    "isAvailable": true,
+    "borrowHistory": [
+      {
+        "userId": "LIB-02315",
+        "borrowDate": "2023-05-10",
+        "returnDate": "2023-06-01"
+      },
+      {
+        "userId": "LIB-04178",
+        "borrowDate": "2024-01-12",
+        "returnDate": "2024-02-03"
+      }
+    ],
+    "ratings": [4.8, 5.0, 4.5, 4.9]
+  }
+}
