@@ -41,12 +41,14 @@ public class FilesTest {
     @DisplayName("Проверка PDF файла из архива")
     void checkPdfFile() throws Exception {
         Charset charset = Charset.forName("CP866");
+        boolean pdfFileFound = false;
 
         try (ZipInputStream zis = new ZipInputStream(Objects.requireNonNull
                 (cl.getResourceAsStream("QaGuru_HM_9_files.zip")), charset)) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.getName().endsWith(".pdf")) {
+                    pdfFileFound = true;
                     PDF pdf = new PDF(zis);
                     Assertions.assertTrue(
                             pdf.text.contains("k-bessonov"),
@@ -56,6 +58,7 @@ public class FilesTest {
                 }
             }
         }
+        Assertions.assertTrue(pdfFileFound, "В архиве отсутствуют PDF-файлы");
 
     }
 
@@ -63,12 +66,14 @@ public class FilesTest {
     @DisplayName("Проверка XLSX файла из архива")
     void checkXlsxFile() throws Exception {
         Charset charset = Charset.forName("CP866");
+        boolean xlsxFound = false;
 
         try (ZipInputStream zis = new ZipInputStream(Objects.requireNonNull
                 (cl.getResourceAsStream("QaGuru_HM_9_files.zip")), charset)) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.getName().endsWith(".xlsx")) {
+                    xlsxFound = true;
                     XLS xls = new XLS(zis);
                     String actualValue = xls.excel.getSheetAt(0).getRow(1).getCell(1).getStringCellValue();
 
@@ -77,6 +82,7 @@ public class FilesTest {
                 }
             }
         }
+        Assertions.assertTrue(xlsxFound, "В архиве отсутствуют PDF-файлы");
 
     }
 
@@ -84,11 +90,14 @@ public class FilesTest {
     @DisplayName("Проверка CSV-файла в архиве")
     void checkCsvInZip() throws Exception {
         Charset charset = Charset.forName("CP866");
+        boolean csvFound = false;
+
         try (ZipInputStream zis = new ZipInputStream(Objects.requireNonNull
                 (cl.getResourceAsStream("QaGuru_HM_9_files.zip")),charset)) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.getName().endsWith(".csv")) {
+                    csvFound = true;
                     try (CSVReader reader = new CSVReader(new InputStreamReader(zis))) {
                         List<String[]> rows = reader.readAll();
                         Assertions.assertEquals(2, rows.size());
@@ -103,7 +112,9 @@ public class FilesTest {
                     }
                     break;
                 }
+
             }
         }
+        Assertions.assertTrue(csvFound, "В архиве отсутствуют PDF-файлы");
     }
 }
